@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+<!--                    <xpath expr="//div[hasclass('responsive-price')]" position="inside">-->
+<!--                      <t t-esc="line.ar_name"/>-->
+<!--&lt;!&ndash;              <t t-esc="Math.round(line.quantity * Math.pow(10, env.pos.dp['Product Unit of Measure'])) / Math.pow(10, env.pos.dp['Product Unit of Measure'])"/>&ndash;&gt;-->
+<!--                    </xpath>-->
+
+<!--#################################################BBBBBBBBB################-->
+
+<!--        <xpath expr="//div[hasclass('responsive-price')]/div[hasclass('pos-receipt-left-padding')]" position="replace">-->
+<!--&lt;!&ndash;            <xpath expr="//div[hasclass('oe_button_box')]/button" &ndash;&gt;-->
+
+
+<!--            <div class="responsive-price" t-if="receipt.is_gcc_country">-->
+<!--                <div class="pos-receipt-left-padding" style="display: inline-flex;">-->
+<!--                    <div t-translation="off"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </xpath>-->
+<!--        ######################################################-->
+ <xpath expr="//div[hasclass('responsive-price')]/div[hasclass('pos-receipt-left-padding')]" position="replace">
+            <div class="responsive-price" t-if="receipt.is_gcc_country">
+<!--                <div class="pos-receipt-left-padding" style="display: inline-flex;">-->
+<!--                <div class="pos-receipt-left-padding" style="display: inline-flex;">-->
+                    <div t-translation="off"><t t-esc="line.ar_name"/>
+                        <br/>
+                        <t t-esc="line.note"/>
+                    </div>
+
+<!--                </div>-->
+<!--                <span t-esc="env.pos.format_currency_no_symbol(line.price_display)" class="price_display pos-receipt-right-align"/>-->
+            </div>
+
+        </xpath>
+         <xpath expr="//div[hasclass('responsive-price')]/div[hasclass('pos-receipt-left-padding')]" position="replace">
+                             <div t-translation="off">
+                                 <t t-esc="line.ar_name"/><br/>
+                                 <t t-esc="line.note"/>
+                             </div>
+
+         </xpath>
+
+
+
+
+    </t>
+
+</templates>

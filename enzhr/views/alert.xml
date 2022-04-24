@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="emp_search_inherit" model="ir.ui.view">
+        <field name="name">Employee Search Inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_manager']" position="after">
+                <field name="passport_allert"/>
+                <field name="emp_age_allert"/>
+                <field name="visa_alert"/>
+                <filter name="group_pasportexpiry" string="Passport Expiry" domain="[('passport_allert','=',True)]"/>
+                <filter name="group_agealert" string="Age Alert" domain="[('emp_age_allert','=',True)]"/>
+                <filter name="group_residentcard" string="Resident Card Alert"
+                        domain="[('resident_card_allert','=',True)]"/>
+                <filter name="group_visa" string="Visa Alert"
+                        domain="[('visa_alert','=',True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_emp_visaalert" model="ir.actions.act_window">
+        <field name="name">Employee Visa Alert</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{"search_default_group_pasportexpiry":1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Visa Going To Expire!.
+            </p>
+        </field>
+    </record>
+    <record id="action_emp_agealert" model="ir.actions.act_window">
+        <field name="name">Employee Age Alert</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{"search_default_group_agealert":1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Age Alert!.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_emp_residentcard" model="ir.actions.act_window">
+        <field name="name">Employee Resident Card Alert</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{"search_default_group_residentcard":1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Resident Card Alert!.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_emp_visa_exp" model="ir.actions.act_window">
+        <field name="name">Employee Visa Alert</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{"search_default_group_visa":1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Visa Alert!.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_emp_passport_exp" model="ir.actions.act_window">
+        <field name="name">Employee Passport Alert</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{"search_default_group_pasportexpiry":1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Resident Card Alert!.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_emp_alertconfigtree" model="ir.ui.view">
+        <field name="name">Alert Configuration</field>
+        <field name="model">alert.config</field>
+        <field name="arch" type="xml">
+            <tree string="Alert Configuration">
+                <field name="visa_month"/>
+                <field name="resident_month"/>
+                <field name="passport_month"/>
+                 <field name="age"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_emp_alertconfigform" model="ir.ui.view">
+        <field name="name">Alert Configuration</field>
+        <field name="model">alert.config</field>
+        <field name="arch" type="xml">
+            <form string="Employee Bonus">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="visa_month"/>
+                            <field name="resident_month"/>
+
+                        </group>
+                        <group>
+                            <field name="passport_month"/>
+                            <field name="age"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_emp_alertconfig" model="ir.actions.act_window">
+        <field name="name">Alert Configuration</field>
+        <field name="res_model">alert.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Alert Configuration!.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Alerts"
+              id="alert_main" sequence="3"
+              parent="hr.menu_hr_root"
+    />
+<!--    <menuitem name="Visa Expiry"-->
+<!--              id="visaalert_main" sequence="1"-->
+<!--              parent="alert_main" action="action_emp_visaalert"-->
+<!--    />-->
+    <menuitem name="Resident Card Alert"
+              id="residentcard_main" sequence="2"
+              parent="alert_main" action="action_emp_residentcard"
+    />
+    <menuitem name="Passport Alert"
+              id="passport_main" sequence="2"
+              parent="alert_main" action="action_emp_passport_exp"
+    />
+    <menuitem name="Visa Alert"
+              id="visa_main" sequence="2"
+              parent="alert_main" action="action_emp_visa_exp"
+    />
+    <menuitem name="Age Alert"
+              id="agealert_main" sequence="3"
+              parent="alert_main" action="action_emp_agealert"
+    />
+    <menuitem name="Alert Configuration"
+              id="alertconfig_main" sequence="3"
+              parent="hr.menu_human_resources_configuration" action="action_emp_alertconfig"
+    />
+
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="enzhr_leaveform_form" model="ir.ui.view">
+        <field name="name">Leave Form</field>
+        <field name="model">leave.form</field>
+        <field name="arch" type="xml">
+            <form string="Leave Form">
+                <header>
+                    <button name="submit_request" type="object" string="Submit" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                    <button name="approve_request" type="object" string="Approve" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'submit')]}"/>
+                    <button name="rejected_request" type="object" string="Reject" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'submit')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <label for="name"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Request">
+                            <field name="date" required="1"/>
+                            <field name="employee_id" required="1"/>
+                            <field name="holiday_status_id" required="1"/>
+                            <field name="request_date_from_first" autocomplete="off"/>
+                            <field name="request_date_to_first"  autocomplete="off"/>
+                            <field name="number_of_days_first"/>
+                        </group>
+                        <group string="Approved">
+                            <field name="request_date_from" autocomplete="off"/>
+                            <field name="request_date_to" autocomplete="off"/>
+                            <field name="number_of_days"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="enzhr_leaveform_tree" model="ir.ui.view">
+        <field name="name">Leave Form</field>
+        <field name="model">leave.form</field>
+        <field name="arch" type="xml">
+            <tree string="Leave Form">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="request_date_from_first"/>
+                <field name="request_date_to_first"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="enzhr_leaveform_action" model="ir.actions.act_window">
+        <field name="name">Leave Form</field>
+        <field name="res_model">leave.form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Leave Requests!
+            </p>
+        </field>
+    </record>
+    <menuitem name="Leave Form"
+              id="enzhr_leaveform" sequence="3"
+              parent="emppayslip_main"
+              action="enzhr_leaveform_action"/>
+</odoo>

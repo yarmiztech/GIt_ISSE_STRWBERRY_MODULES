@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <record id="enzemploanchange_tree" model="ir.ui.view">
+        <field name="name">Loan Change</field>
+        <field name="model">hr.loan.change</field>
+        <field name="arch" type="xml">
+            <tree string="Loan Change">
+                <field name="employee_id"/>
+                <field name="loan_id"/>
+                <field name="loan_amount"/>
+                <field name="installment"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="enzemploanchange_form" model="ir.ui.view">
+        <field name="name">Loan Change</field>
+        <field name="model">hr.loan.change</field>
+        <field name="arch" type="xml">
+            <form string="Loan Change">
+                <header>
+                    <button name="update_loan" string="Update" type="object" class="oe_highlight" attrs="{'invisible': [('loan_flag','=',True)]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="loan_id"/>
+                            <field name="loan_amount"/>
+                            <field name="installment"/>
+                            <field name="loan_flag" invisible="1"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Installments">
+                            <field name="payment_lines">
+                                <tree editable="bottom" decoration-success="paid == True">
+                                    <field name="payment_date"/>
+                                    <field name="amount"/>
+                                    <field name="paid" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="enzemploanchange_action" model="ir.actions.act_window">
+        <field name="name">Loan Change</field>
+        <field name="res_model">hr.loan.change</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Loan Change!
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Loan Change"
+        id="enzemp_loan_change"
+        parent = "ohrms_loan.menu_hr_loans_and_advances"
+        sequence="2" action="enzemploanchange_action"/>
+</odoo>

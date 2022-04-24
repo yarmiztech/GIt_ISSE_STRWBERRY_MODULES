@@ -1,0 +1,66 @@
+<odoo>
+    <record id="straw_expenses_lines_filter" model="ir.ui.view">
+        <field name="name">straw.expenses.lines.search</field>
+        <field name="model">straw.expenses.lines</field>
+        <field name="arch" type="xml">
+            <search string="Search Expenses">
+                <field name="payment_date"/>
+                <field name="company_id" invisible="1"/>
+                <field name="branch_id"/>
+                <field name="journal_id"/>
+                <field name="type_of_expenses"/>
+                <field name="type_of_expenses"/>
+                <field name="narration"/>
+                <separator/>
+<!--                <filter string="Branch Wise" name="group_branch_id" context="{'default_group_by' : 'branch_id'}"/>-->
+                <filter string="Payment Date" name="payment_date" date="payment_date"/>
+                 <filter string='Type Of Expense' name="type_of_expenses" domain="[]" context="{'group_by': 'type_of_expenses'}"/>
+                <filter string='Narration' name="narration" domain="[]" context="{'group_by': 'narration'}"/>
+                <filter string='Journal' name="journal_id" domain="[]" context="{'group_by': 'journal_id'}"/>
+                <filter string='Branch' name="branch_id" domain="[]" context="{'group_by': 'branch_id'}"/>
+                <filter string='company_id' name="company_id" domain="[]" context="{'group_by': 'company_id'}"/>
+                <separator/>
+                <group expand="0" string="Group By">
+<!--                    <filter string="Journal Entry" name="group_by_move" domain="[]" context="{'group_by': 'move_id'}"/>-->
+<!--                    <filter string="Account" name="group_by_account" domain="[]" context="{'group_by': 'account_id'}"/>-->
+<!--                    <filter string="Partner" name="group_by_partner" domain="[]" context="{'group_by': 'partner_id'}"/>-->
+<!--                    <filter string="Journal" name="journal" domain="[]" context="{'group_by': 'journal_id'}"/>-->
+                    <filter string="branch_id" name="group_by_branch_id" domain="[]"
+                            context="{'group_by': 'branch_id'}"/>
+                    <filter string="type_of_expenses" name="group_by_type_of_expenses" domain="[]"
+                            context="{'group_by': 'type_of_expenses'}"/>
+
+<!--                    <filter string="Date" name="groupby_date" domain="[]" context="{'group_by': 'date'}"/>-->
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="expenses_straw_report_tree" model="ir.ui.view">
+        <field name="name">straw.expenses.lines.tree</field>
+        <field name="model">straw.expenses.lines</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="payment_date"/>
+                <field name="branch_id"/>
+                <field name="type_of_expenses"/>
+                <field name="journal_id"/>
+                <field name="company_id" invisible="1"/>
+                <field name="narration"/>
+                <field name="amount" sum="Total"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_expense_straw_report" model="ir.actions.act_window">
+        <field name="name">Strawberry Expense Report</field>
+        <field name="res_model">straw.expenses.lines</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_group_by_type_of_expenses': 1}</field>
+
+    </record>
+
+    <menuitem name="Strawberry Expense Report" id="menu_starw_exp_report" action="action_expense_straw_report"
+              parent="menu_starw_exp"/>
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="visa_alert_1" model="ir.cron">
+            <field name="name">Visa alert</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.visaalert()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+        <record id="passport_alert_1" model="ir.cron">
+            <field name="name">Passport alert</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.passport_expirycheck()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+
+        <record id="residentalert_1" model="ir.cron">
+            <field name="name">Resident alert</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.residentalert()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+
+        <record id="calculateage_1" model="ir.cron">
+            <field name="name">Age alert</field>
+            <field name="model_id" ref="model_hr_employee"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.calculateage()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_expenses_report_montly,expenses.report.montly,model_expenses_report_montly,,1,1,1,1
+access_expenses_montly_lines,expenses.montly.lines,model_expenses_montly_lines,,1,1,1,1

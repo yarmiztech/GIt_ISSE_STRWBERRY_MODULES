@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="enzhrsalary_payment_menu_form" model="ir.ui.view">
+        <field name="name">Salary Payment</field>
+        <field name="model">salary.payment.hr</field>
+        <field name="arch" type="xml">
+            <form string="Salary Payment">
+                <header>
+                    <button string="Pay Salary" type="object" name="payment" class="oe_highlight"
+                            attrs="{'invisible': [('payslip_flag', '=', True)]}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="payslip_flag" invisible="1"/>
+                            <!--                        <field name="month"/>-->
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Salary">
+                            <field name="payment_lines">
+                                <tree editable="bottom">
+                                    <field name="employee_id" required="1"/>
+                                    <field name="basic_salary"/>
+                                    <field name="description"/>
+                                    <field name="month"/>
+                                    <field name="deduction"/>
+                                    <field name="payment_amount" required="1"/>
+                                    <field name="payment_type" required="1"/>
+                                    <field name="date" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="enzhrsalary_payment_menu_action" model="ir.actions.act_window">
+        <field name="name">Salary Payment</field>
+        <field name="res_model">salary.payment.hr</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Payment!
+            </p>
+        </field>
+    </record>
+
+    <record id="enzhrsalary_payment_menu_record_tree" model="ir.ui.view">
+        <field name="name">Salary Record</field>
+        <field name="model">salary.payment.lines.hr</field>
+        <field name="arch" type="xml">
+            <tree string="Salary Record">
+                <field name="employee_id"/>
+                <field name="basic_salary"/>
+                <field name="month"/>
+                <field name="description"/>
+                <field name="deduction"/>
+                <field name="payment_amount"/>
+                <field name="payment_type"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="enzhrsalary_payment_menu_record_action" model="ir.actions.act_window">
+        <field name="name">Salary Record</field>
+        <field name="res_model">salary.payment.lines.hr</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Payment!
+            </p>
+        </field>
+    </record>
+
+    <!--    <record id="payroll_inherit_enzhr" model="ir.ui.view">-->
+    <!--        <field name="name">Payroll Inherit</field>-->
+    <!--        <field name="model">hr.payslip</field>-->
+    <!--        <field name="inherit_id" ref="payslips_payment.view_hr_payslip_form_inherit_uae_payroll"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//header//button[@name='%(payslips_payment.hr_payslip_sheet_register_payment_wizard_action)d']"-->
+    <!--                   position="replace">-->
+    <!--                <button name="%(payslips_payment.hr_payslip_sheet_register_payment_wizard_action)d" states="done" type="action" string="Register Payment" class="oe_highlight o_expense_sheet_pay" context="{'default_amount': total_amount}" groups="account.group_account_manager" invisible="1"/>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <menuitem name="Payslip"
+              id="emppayslip_main" sequence="3"
+              parent="hr.menu_hr_root"
+    />
+
+    <menuitem name="Employee Payslips"
+              id="employee_payslips_enzhr" sequence="1"
+              parent="emppayslip_main"
+              action="om_hr_payroll.action_view_hr_payslip_form"/>
+
+    <menuitem name="Direct Salary Payment"
+              id="enzhr_salary_payment" sequence="2"
+              parent="emppayslip_main"
+              action="enzhrsalary_payment_menu_action"/>
+
+    <menuitem name="Salary Registery"
+              id="enzhr_salary_payment_record" sequence="3"
+              parent="emppayslip_main"
+              action="enzhrsalary_payment_menu_record_action"/>
+
+</odoo>

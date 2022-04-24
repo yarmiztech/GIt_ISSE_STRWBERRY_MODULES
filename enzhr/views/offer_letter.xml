@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <record id="offer_main_tree" model="ir.ui.view">
+        <field name="name">Offer Letter</field>
+        <field name="model">offer.letter</field>
+        <field name="arch" type="xml">
+            <tree string="Offer Letter">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="job_id"/>
+                <field name="last_joining_date"/>
+                <field name="salary"/>
+                <field name="states"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="offer_main_form" model="ir.ui.view">
+        <field name="name">Offer Letter</field>
+        <field name="model">offer.letter</field>
+        <field name="arch" type="xml">
+            <form string="Offer Letter">
+                <header>
+                    <field name="states" widget="statusbar"/>
+                    <button name="commited" string="Joined" class="oe_highlight" type="object" attrs="{'invisible': [('states', '!=', 'draft')]}"/>
+                    <button name="emp_registration" string="Register Employee" class="oe_highlight" type="object" attrs="{'invisible': [('emp_count', '>', 0)]}"/>
+                    <button name="contract_creation" string="Create Contract" class="oe_highlight" type="object" attrs="{'invisible': [('contract_count', '>', 0)]}"/>
+                    <button name="cancel" string="Cancel" type="object" attrs="{'invisible': [('states', '!=', 'draft')]}"/>
+                </header>
+                <sheet>
+
+                    <div class="oe_button_box" name="button_box">
+                        <button name="employee_details" type="object" class="oe_stat_button" icon="fa-usd"
+                                attrs="{'invisible': [('states', '=', 'draft')]}"  string="Employee">
+<!--                            <field name="emp_count" widget="statinfo"/>-->
+                        </button>
+                        <button name="contract_details" type="object" class="oe_stat_button" icon="fa-usd"
+                                attrs="{'invisible': [('states', '=', 'draft')]}" string="Contract">
+<!--                            <field string="Contract" name="contract_count" widget="statinfo"/>-->
+                        </button>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="department_id"/>
+                            <field name="job_id"/>
+                            <field name="emp_count" invisible="1"/>
+                            <field name="contract_count" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="last_joining_date"/>
+                            <field name="salary"/>
+                            <field name="date"/>
+                            <field name="join_date" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="offer_main_action" model="ir.actions.act_window">
+        <field name="name">Offer Letter</field>
+        <field name="res_model">offer.letter</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Offer Letter!.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Offer"
+              id="offer_main" sequence="2"
+              parent="hr_recruitment.menu_hr_recruitment_root" action="offer_main_action"
+    />
+</odoo>

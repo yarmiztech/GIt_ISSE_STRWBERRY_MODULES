@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <record id="experience_main_tree" model="ir.ui.view">
+        <field name="name">Experiance Certificate</field>
+        <field name="model">experience.certificate</field>
+        <field name="arch" type="xml">
+            <tree string="Experiance Certificate">
+                <field name="employee_id"/>
+                <field name="job_id"/>
+                <field name="department_id"/>
+                <field name="private_address"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="experience_main_form" model="ir.ui.view">
+        <field name="name">Experiance Certificate</field>
+        <field name="model">experience.certificate</field>
+        <field name="arch" type="xml">
+            <form string="Experiance Certificate">
+                <header>
+                    <button name="approve_certificate" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('status','!=','draft')]}"/>
+                    <button name="rejected_certificate" string="Reject" type="object" attrs="{'invisible': [('status','!=','draft')]}"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="remarks"/>
+                        </group>
+                        <group>
+                            <field name="job_id"/>
+                            <field name="department_id"/>
+                            <field name="private_address"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="experience_main_action" model="ir.actions.act_window">
+        <field name="name">Experiance Certificate</field>
+        <field name="res_model">experience.certificate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Experiance Certificate!.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Letters"
+              id="letters_main" sequence="3"
+              parent="hr.menu_hr_root"
+    />
+    <!--    <menuitem name="Offer"-->
+    <!--              id="offer_letters_main" sequence="1"-->
+    <!--              parent="letters_main"-->
+    <!--    />-->
+
+
+    <menuitem name="Experience"
+              id="experience_main" sequence="1"
+              parent="letters_main" action="experience_main_action"
+    />
+
+</odoo>

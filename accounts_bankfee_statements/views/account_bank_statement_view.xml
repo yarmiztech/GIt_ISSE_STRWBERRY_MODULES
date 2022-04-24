@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--         <record model="ir.ui.view" id="view_account_bankfee">-->
+<!--        <field name="name">account.journal.form</field>-->
+<!--        <field name="model">account.journal</field>-->
+<!--        <field name="inherit_id" ref="account.view_account_journal_form" />-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='default_account_id']" position="after">-->
+<!--                <field name="bank_charge_account"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+        <record id="bank_fee_statement_search" model="ir.ui.view">
+            <field name="name">bank.fee.statement.report</field>
+            <field name="model">bank.fee.statement</field>
+            <field name="arch" type="xml">
+                <search string="Search Order">
+                    <field name="create_date"/>
+                    <field name="user_id"/>
+                    <field name="journal_id"/>
+                    <field name="company_id"/>
+                </search>
+            </field>
+        </record>
+        <record id="bank_fee_statement_form" model="ir.ui.view">
+            <field name="name">bank.fee.statement.form</field>
+            <field name="model">bank.fee.statement</field>
+            <field name="arch" type="xml">
+                <form string="Bank Fee">
+                    <header>
+                         <button type="object" string="Confirm Statement" states="draft" name="action_credit_statement"
+                            class="btn btn-success"/>
+<!--                        <button type="object" string="Confirm " name="action_bill_statement"-->
+<!--                            class="btn btn-success"/>-->
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,paid"/>
+                    </header>
+                    <sheet>
+                         <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                        <group>
+                            <group>
+                                <field name="create_date"/>
+                                <field name="user_id"/>
+                                <field name="journal_id"/>
+                            </group>
+                            <group>
+                               <field name="fee_amount"/>
+                                <field name="company_id"/>
+                                <field name="note" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="party_advance_ledger_report_tree" model="ir.ui.view">
+            <field name="name">Bank Fee Statement</field>
+            <field name="model">bank.fee.statement</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_date"/>
+                    <field name="user_id"/>
+                    <field name="journal_id"/>
+                    <field name="company_id"/>
+                    <field name="fee_amount"/>
+<!--                    <field name="note"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_bank_fee_statement" model="ir.actions.act_window">
+            <field name="name">Bank Fee Statement</field>
+            <field name="res_model">bank.fee.statement</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+          <menuitem name="Bank Fee Statement" groups="group_bankfee_user"
+                  id="bank_fee_stmt"
+                  sequence="70"
+                  web_icon="accounts_bankfee_statements,static/description/icon.png"/>
+
+        <menuitem name="Bank Fee Statement" id="menu_bank_fee_statement"
+                  action="action_bank_fee_statement" sequence="0"
+                  parent="accounts_bankfee_statements.bank_fee_stmt"/>
+
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <record id="payroll_inherit_journal" model="ir.ui.view">
+        <field name="name">Payroll Inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header//button[@name='refund_sheet']"
+                   position="after">
+                <button name="%(payslip_payment_journal.payment_journal_wizard_action)d" states="done" type="action" string="Payment" class="oe_highlight o_expense_sheet_pay" context="{'default_amount': total_amount_journal,'default_employee_id':employee_id,'default_payslip_id':id}" groups="account.group_account_manager"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="total_amount_journal"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

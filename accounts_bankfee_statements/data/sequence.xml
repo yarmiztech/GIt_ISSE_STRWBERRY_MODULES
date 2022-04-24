@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Adding a salary rule for loan-->
+	<data noupdate="0">
+
+
+        <record id="pay_account_statements" model="ir.sequence">
+            <field name="name">Bank Fee Statement</field>
+            <field name="code">bank.fee.statement</field>
+            <field name="prefix">BFS/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+	</data>
+</odoo>

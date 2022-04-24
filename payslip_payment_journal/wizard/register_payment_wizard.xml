@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="payment_journal_wizard_form" model="ir.ui.view">
+        <field name="name">Register Payment</field>
+        <field name="model">register.payment.wizard.journal</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="employee_id" required="1"/>
+                        <field name="payment_type" required="1"/>
+                        <field name="amount" required="1"/>
+                    </group>
+                    <group>
+                        <field name="payment_date" required="1"/>
+                        <field name="communication"/>
+                        <field name="payslip_id"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Validate" name="payment" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="payment_journal_wizard_action" model="ir.actions.act_window">
+        <field name="name">Register Payment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">register.payment.wizard.journal</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="payslip_payment_journal.model_register_payment_wizard_journal"/>
+        <field name="view_id" ref="payment_journal_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+<!--    <record id="payment_journal_wizard_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Register Payment</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">register.payment.wizard.journal</field>-->
+<!--        <field name="view_model">form</field>-->
+<!--        <field name="view_id" ref="payment_journal_wizard_form"/>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+</odoo>

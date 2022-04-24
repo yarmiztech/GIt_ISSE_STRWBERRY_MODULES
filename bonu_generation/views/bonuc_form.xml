@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employeebonusformaction_form" model="ir.ui.view">
+        <field name="name">Employee Bonus</field>
+        <field name="model">bonus.form</field>
+        <field name="arch" type="xml">
+            <form string="Employee Bonus">
+                <header>
+                    <button string="Pay Bonus" name="payment" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_date" autocomplete="off"/>
+                            <field name="to_date" autocomplete="off"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <field name="bonus_lines">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="employee_id"/>
+                                    <field name="commission"/>
+                                    <field name="select"/>
+                                    <field name="payment_type" required="1"/>
+                                    <field name="status" invisible="1"/>
+                                    <field name="commission_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="employeebonusformaction" model="ir.actions.act_window">
+        <field name="name">Employee Bonus</field>
+        <field name="res_model">bonus.form</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Bouns!.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Employee Bonus"
+              id="empcommision_main" sequence="3"
+              parent="hr.menu_hr_root"
+    />
+    <menuitem name="Payment Form"
+              id="empcommision_gen" sequence="1"
+              parent="empcommision_main" action="employeebonusformaction"
+    />
+
+</odoo>

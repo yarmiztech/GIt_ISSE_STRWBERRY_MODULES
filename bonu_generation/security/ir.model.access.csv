@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bonus_form,bonus.form.group_user,model_bonus_form,base.group_user,1,1,1,1
+access_bonus_lines,bonus.lines.group_user,model_bonus_lines,base.group_user,1,1,1,1
+access_bonus_rec,bonus.rec.group_user,model_bonus_rec,base.group_user,1,1,1,1
+access_bonus_payment_history,bonus.payment.history.group_user,model_bonus_payment_history,base.group_user,1,1,1,1
+access_bonus_history_lines,bonus.history.lines.group_user,model_bonus_history_lines,base.group_user,1,1,1,1
+access_bonus_config,bonus.config.lines.group_user,model_bonus_config,base.group_user,1,1,1,1
+

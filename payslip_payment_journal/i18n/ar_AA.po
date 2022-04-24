@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* payslip_payment_journal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-03 12:53+0000\n"
+"PO-Revision-Date: 2021-06-03 12:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__amount
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: payslip_payment_journal
+#: model_terms:ir.ui.view,arch_db:payslip_payment_journal.payment_journal_wizard_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__communication
+msgid "Communication"
+msgstr "اتصالات"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__employee_id
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: payslip_payment_journal
+#: model:ir.model,name:payslip_payment_journal.model_hr_payslip
+msgid "Pay Slips"
+msgstr "قسائم الدفع"
+
+#. module: payslip_payment_journal
+#: model_terms:ir.ui.view,arch_db:payslip_payment_journal.payroll_inherit_journal
+msgid "Payment"
+msgstr "دفعة"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__payment_date
+msgid "Payment Date"
+msgstr "تاريخ السداد"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__payment_type
+msgid "Payment Types"
+msgstr "أنواع الدفع"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_register_payment_wizard_journal__payslip_id
+msgid "Payslip"
+msgstr "وصل الراتب"
+
+#. module: payslip_payment_journal
+#: model:ir.actions.act_window,name:payslip_payment_journal.payment_journal_wizard_action
+msgid "Register Payment"
+msgstr "تسجيل دفعة"
+
+#. module: payslip_payment_journal
+#: model:ir.model.fields,field_description:payslip_payment_journal.field_hr_payslip__total_amount_journal
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+#. module: payslip_payment_journal
+#: model_terms:ir.ui.view,arch_db:payslip_payment_journal.payment_journal_wizard_form
+msgid "Validate"
+msgstr "اعتماد"
+
+#. module: payslip_payment_journal
+#: model:ir.model,name:payslip_payment_journal.model_register_payment_wizard_journal
+msgid "register.payment.wizard.journal"
+msgstr ""
+

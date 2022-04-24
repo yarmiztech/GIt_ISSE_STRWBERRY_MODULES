@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <report id="expenses_monthly_report"
+                model="expenses.report.montly"
+                string="Print Expenses Report(All)"
+                report_type="qweb-pdf"
+                name="expenses_report_montly.repo_cashbook"
+                file="expenses_report_montly.repo_cashbook"/>
+
+        <report id="expenses_monthly_report_tax"
+                        model="expenses.report.montly"
+                        string="Print Expenses Report(Tax)"
+                        report_type="qweb-pdf"
+                        name="expenses_report_montly.repo_cashbook_tax"
+                        file="expenses_report_montly.repo_cashbook_tax"/>
+         <report id="expenses_monthly_report_without"
+                        model="expenses.report.montly"
+                        string="Print Expenses Report(Without Vat)"
+                        report_type="qweb-pdf"
+                        name="expenses_report_montly.repo_cashbook_without"
+                        file="expenses_report_montly.repo_cashbook_without"/>
+
+
+    </data>
+</odoo>

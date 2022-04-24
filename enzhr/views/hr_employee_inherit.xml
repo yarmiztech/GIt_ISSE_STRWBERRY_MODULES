@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_emp_inheritenz" model="ir.ui.view">
+        <field name="name">Hr Employee Inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <!--            <button name="toggle_active" position="after">-->
+            <!--                <button name="experiance_certify" type="object" class="oe_stat_button" icon="fa-file-text-o">-->
+            <!--                    <field string="Experiance Certificate" widget="statinfo"/>-->
+            <!--                </button>-->
+            <!--            </button>-->
+            <xpath expr="//sheet/div[@name='button_box']" position="inside">
+                <button name="experiance_certify" type="object" class="oe_stat_button" icon="fa-file-text-o" string="Experiance Certificate">
+                </button>
+                <button name="warning" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                    <field string="Warning" widget="statinfo" name="warning_count"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='passport_id']" position="after">
+                <field name="passport_expiry"/>
+                <field name="passport_allert" invisible="1"/>
+                <field name="passport_allertcomp" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='visa_expire']" position="after">
+                <field name="visa_alert" invisible="1"/>
+                <field name="resident_cardno"/>
+                <field name="resident_cardexp" string="Resident Card Expiry"/>
+                <field name="resident_card_allertcomp" invisible="1"/>
+                <field name="resident_card_allert" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='birthday']" position="after">
+                <field name="emp_age"/>
+                <field name="emp_age_allert" invisible="1"/>
+                <field name="emp_age_allertcomp" invisible="1"/>
+                <field name="offer_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page string="Previous Experiance">
+                    <field name="experiance_lines">
+                        <tree editable="bottom">
+                            <field name="employee_id" invisible="1"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="position"/>
+                            <field name="organization"/>
+                            <field name="ref_name"/>
+                            <field name="ref_position"/>
+                            <field name="ref_phone"/>
+                            <field name="email"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Insurance Details">
+                    <field name="insurance_lines">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="relation"/>
+                            <field name="percentage" sum="Total"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="hr_emp_contractenz" model="ir.ui.view">
+        <field name="name">Hr Employee Inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="before">
+                <field name="offer_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

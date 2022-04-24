@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="repo_cashbook_tax">
+        <t t-call="web.html_container">
+            <div class="page">
+                <h2 style="font-style:oblique;font-weight:bold;">
+                </h2>
+
+                <table class="table" style="border:1px solid black;width:100%">
+                      <tr>
+                        <td colspan="7">
+                            <strong><center>Expenses Of &amp;nbsp;
+                            &amp;nbsp;from &amp;nbsp;
+                            <t t-esc="docs.from_date.strftime('%d-%m -%Y')"/> &amp;nbsp; To &amp;nbsp;
+                                <t t-esc="docs.to_date.strftime('%d-%m -%Y')"/></center></strong>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>Date</strong>
+                            </center>
+                        </td>
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>Description</strong>
+                            </center>
+                        </td>
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>Employee</strong>
+                            </center>
+                        </td>
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>Paid By</strong>
+                            </center>
+                        </td>
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>State</strong>
+                            </center>
+                        </td>
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>Without Vat</strong>
+                            </center>
+                        </td>
+                        <td style="border:1px solid black;">
+                            <center>
+                                <strong>Vat Amount</strong>
+                            </center>
+                        </td> <td style="border:1px solid black;">
+                            <center>
+                                <strong>Total Amount</strong>
+                            </center>
+                        </td>
+                    </tr>
+                    <t t-set="i" t-value="1"/>
+                    <t t-foreach="docs.invoice_lines.filtered(lambda a:a.tax_amount != 0)" t-as="o">
+                        <tr>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.date"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.name"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.employee_id.name"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                   <span t-field="o.payment_mode"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.state"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.tax_excluded"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.tax_amount"/>
+                                </center>
+                            </td>
+                            <td style="border:1px solid black;">
+                                <center>
+                                    <t t-esc="o.total_amount"/>
+                                </center>
+                            </td>
+                        </tr>
+                        <t t-set="i" t-value="i+1"/>
+                    </t>
+                     <tr>
+                            <td style="border:1px solid black;" colspan="5">
+                                <strong>
+                                <center>
+                                   Grand Total
+                                </center>
+                                </strong>
+                            </td>
+                            <td style="border:1px solid black;">
+                               <strong><center> <t t-esc="sum(docs.invoice_lines.mapped('tax_excluded'))"/></center></strong>
+
+                            </td>
+                            <td style="border:1px solid black;">
+                                <strong><center><t t-esc="sum(docs.invoice_lines.mapped('tax_amount'))"/></center></strong>
+
+                            </td>
+                           <td style="border:1px solid black;">
+                               <strong><center><t t-esc="sum(docs.invoice_lines.mapped('total_amount'))"/></center></strong>
+
+                           </td>
+
+                        </tr>
+
+                </table>
+            </div>
+        </t>
+        <!--        </t>-->
+    </template>
+
+
+
+</odoo>

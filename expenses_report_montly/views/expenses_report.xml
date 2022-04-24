@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="expenses_report_montly_tree" model="ir.ui.view">
+        <field name="name">Expense Report</field>
+        <field name="model">expenses.report.montly</field>
+        <field name="arch" type="xml">
+            <tree string="Invoice">
+                <field name="date"/>
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="expenses_report_montly_form" model="ir.ui.view">
+        <field name="name">Expense Report</field>
+        <field name="model">expenses.report.montly</field>
+        <field name="arch" type="xml">
+            <form string="Invoice">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                        </group>
+                        <group>
+                            <field name="date" invisible="1"/>
+                            <field name="expense_type" widget="radio"/>
+                            <field name="company_id" />
+                        </group>
+                    </group>
+                    <field name="invoice_lines">
+                        <tree editable="bottom">
+                            <field name="hr_expense"/>
+                            <field name="date"/>
+                            <field name="product_id"/>
+                            <field name="hr_expense_sheet" invisible="1"/>
+                            <field name="name"/>
+                            <field name="employee_id"/>
+                            <field name="payment_mode"/>
+                            <field name="state"/>
+                            <field name="tax_ids"/>
+                            <field name="tax_excluded"/>
+                            <field name="tax_amount"/>
+                            <field name="total_amount"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="expenses_report_montly_action" model="ir.actions.act_window">
+        <field name="name">Expenses Report Monthly</field>
+        <field name="res_model">expenses.report.montly</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Expenses port Generated!.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Expenses Report Monthly"
+              id="expenses_report_mont" sequence="1"
+              parent="hr_expense.menu_hr_expense_reports" action="expenses_report_montly_action"
+    />
+
+</odoo>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="empreport_main_form" model="ir.ui.view">
+        <field name="name">Employee Report</field>
+        <field name="model">employee.full.details</field>
+        <field name="arch" type="xml">
+            <form string="Employee Report">
+                <header>
+                    <button name="print_employee_report" string="Print" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="department_id"/>
+                            <field name="job_id"/>
+                            <field name="from_date" autocomplete="off" invisible="1"/>
+                            <field name="to_date" autocomplete="off" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="visa_no"/>
+                            <field name="passport_no"/>
+                            <field name="resident_no"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contracts">
+                            <field name="contract_lines">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="employee_id"/>
+                                    <field name="job_id"/>
+<!--                                    <field name="type_id"/>-->
+                                    <field name="resource_calendar_id"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="wage"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Leaves">
+                            <field name="leave_lines">
+                                <tree editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="holiday_type" string="Mode"/>
+                                    <field name="holiday_status_id"/>
+                                    <field name="name"/>
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                    <field name="duration_display"/>
+                                </tree>
+                            </field>
+
+                        </page>
+                        <page string="Insurance">
+                            <field name="insurance_lines">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="relation"/>
+                                    <field name="percentage" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Warning">
+                            <field name="warning_lines">
+                                <tree editable="bottom">
+                                    <field name="name" invisible="1"/>
+                                    <field name="remark"/>
+                                    <field name="date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Previous Experiance">
+                            <field name="previous_lines">
+                                <tree editable="bottom">
+                                    <field name="from_date"/>
+                                    <field name="to_date"/>
+                                    <field name="position"/>
+                                    <field name="organization"/>
+                                    <field name="ref_name"/>
+                                    <field name="ref_position"/>
+                                    <field name="ref_phone"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Loans">
+                            <field name="loan_lines">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <!--                                    <field name="employee_id"/>-->
+                                    <field name="loan_amount"/>
+                                    <field name="total_paid_amount"/>
+                                    <field name="balance_amount"/>
+                                    <field name="date"/>
+                                    <!--                                    <field name="state"/>-->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="empreport_main_action" model="ir.actions.act_window">
+        <field name="name">Employee Report</field>
+        <field name="res_model">employee.full.details</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Report!.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Employee Report"
+              id="empreport_main" sequence="3"
+              parent="letters_main" action="empreport_main_action"
+    />
+</odoo>

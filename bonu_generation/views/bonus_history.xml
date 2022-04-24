@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="employeebonushistoryformaction_form" model="ir.ui.view">
+        <field name="name">Employee Bonus History</field>
+        <field name="model">bonus.payment.history</field>
+        <field name="arch" type="xml">
+            <form string="Employee Bonus History">
+                <header>
+                    <button string="Print" name="bonus_report" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="from_date" autocomplete="off"/>
+                            <field name="to_date" autocomplete="off"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <field name="bonus_history_lines">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="payment_date"/>
+                                    <field name="employee_id"/>
+                                    <field name="commission"/>
+<!--                                    <field name="payment_type"/>-->
+<!--                                    <field name="select"/>-->
+                                    <field name="status" invisible="1"/>
+                                    <field name="commission_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="employeebonushistoryformaction" model="ir.actions.act_window">
+        <field name="name">Employee Bonus History</field>
+        <field name="res_model">bonus.payment.history</field>
+        <field name="view_mode">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                No Bouns History!.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem name="Bonus Report"
+              id="empcommision_report_bonus" sequence="3"
+              parent="empcommision_main" action="employeebonushistoryformaction"
+    />
+
+</odoo>

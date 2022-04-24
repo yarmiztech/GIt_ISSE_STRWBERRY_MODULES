@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+      <record id="view_sale_order_strawberry" model="ir.ui.view">
+             <field name="name">sale.order.form.inherit</field>
+             <field name="model">sale.order</field>
+             <field name="inherit_id" ref="sale.view_order_form" />
+             <field name="arch" type="xml">
+               <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="purchase_type_cash"  widget="radio"/>
+                <field name="bank_journal_id" attrs="{'invisible': [('purchase_type_cash', '!=', 'bank')],'required': [('purchase_type_cash', '=', 'bank')]}"/>
+            </xpath>
+                 <xpath expr="//field[@name='date_order']" position="replace">
+                     <field name="date_order" invisible="1"/>
+                 </xpath>
+                 <xpath expr="//field[@name='validity_date']" position="replace">
+                     <field name="validity_date" invisible="1"/>
+                     <field name="straw_quot_date" required="1"/>
+
+                 </xpath>
+             </field>
+     </record>
+     <record id="view_quotation_after_straw" model="ir.ui.view">
+            <field name="name">sale.order.tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='create_date']" position="after">
+                    <field name="straw_quot_date"/>
+                </xpath>
+            </field>
+     </record>
+</odoo>

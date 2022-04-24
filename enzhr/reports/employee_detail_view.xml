@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <template id="employee_report_layout_id">
+    <t t-call="web.html_container">
+<t t-if="not o" t-set="o" t-value="doc"/>
+<t t-if="not company">
+<!--  Multicompany  -->
+<t t-if="company_id">
+<t t-set="company" t-value="company_id"/>
+</t>
+<t t-elif="o and 'company_id' in o">
+<t t-set="company" t-value="o.company_id.sudo()"/>
+</t>
+<t t-else="else">
+<t t-set="company" t-value="res_company"/>
+</t>
+</t>
+<div class="header" t-att-style="report_header_style">
+<!--            <div class="row">-->
+<!--<div class="col-6">-->
+<!--    <h6>حكومة المملكة العربية السعودية<br/>GOVERNMENT OF SAUDI ARABIA</h6>-->
+<!--    </div>-->
+
+
+<!--        <div class="col-6" style="text-align:right;">-->
+<!--                   <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>-->
+
+<!--            <h6>دائرة الاراضي<br/>Land Department</h6>-->
+
+
+<!--        </div>-->
+
+<!--    </div>-->
+
+    <div class="row">
+<div class="col-6">
+       <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height:100px;align=left;" alt="Logo"/>
+    </div>
+
+
+        <div class="col-6" style="text-align:right;">
+            <h6><t t-esc="company.partner_id.name"/> </h6>
+            <h6><t t-esc="company.street"/> </h6>
+            <h6><t t-esc="company.street2"/> </h6>
+            <h6><t t-esc="company.city"/> </h6>
+            <h6><t t-esc="company.state_id.name"/> </h6>
+            <h6><t t-esc="company.zip"/> </h6>
+
+
+        </div>
+<!---->
+    </div>
+</div>
+<div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto">
+<div t-field="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+</div>
+<div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+<t t-raw="0"/>
+</div>
+<div class="footer o_background_footer">
+<div>
+<div t-field="company.report_footer"/>
+<div t-if="report_type == 'pdf'" class="text-muted">
+    <hr style="text-color:orange; width:100%;"></hr>
+     <div class="row">
+        <div class="col-6" style="text-align:right;">
+                        Page:
+                <span class="page"/>
+                         /
+                 <span class="topage"/>
+        </div>
+        <div class="col-6" style="text-align:right;">
+            <span style="color:gray;"> Powered by Enzapps</span>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    </t>
+    </template>
+<template id="employee_report_view_id">
+    		<t t-call="web.html_container">
+    	    	<t t-foreach="docs" t-as="o">
+            <t t-call="enzhr.employee_report_layout_id">
+                <div class="page">
+                    <h2><b><center>Employee Report</center></b></h2>
+                    <table style="width:100%">
+                        <tr>
+                    <td  colspan="8" style="text-align:right"><img t-if="o.image" t-att-src="image_data_uri(o.image)" style="max-height:100px;text-align:right" alt="Logo"/>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"><b>Employee Name</b></td>
+                            <td colspan="1"><t t-esc="o.employee_id.name"/></td>
+                            <td colspan="1"><b>Visa No</b></td>
+                            <td colspan="1"><t t-esc="o.visa_no"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"><b>Department</b></td>
+                            <td colspan="1"><t t-esc="o.department_id.name"/></td>
+                            <td colspan="1"><b>Passport No</b></td>
+                            <td colspan="1"><t t-esc="o.passport_no"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"><b>Job</b></td>
+                            <td colspan="1"><t t-esc="o.job_id.name"/></td>
+                            <td colspan="1"><b>Resident No</b></td>
+                            <td colspan="1"><t t-esc="o.resident_no"/> </td>
+                        </tr>
+
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="9"><center><b>Contract Details</b></center></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><b>Name</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Employee</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Job</b></center></td>
+<!--                            <td colspan="1" style="border:1px solid black"><center><b>Type</b></center></td>-->
+                            <td colspan="1" style="border:1px solid black"><center><b>Resource Calender</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Start Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>End Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>State</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Wage</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.contract_lines" t-as="l">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.employee_id.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.job_id.name"/></center></td>
+<!--                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.type_id.name"/></center></td>-->
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.resource_calendar_id.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.date_start"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.date_end"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.state"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.wage"/></center></td>
+
+                        </tr>
+                          <t t-set="i" t-value="i+1"/>
+
+                          </t>
+
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="9"><center><b>Leave Details</b></center></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><b>Employee</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Mode</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Leave Type</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Name</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Start Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>End Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Duration Display</b></center></td>
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.leave_lines" t-as="l">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.employee_id.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.holiday_type"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.holiday_status_id.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.date_from"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.date_to"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.duration_display"/></center></td>
+                        </tr>
+                          <t t-set="i" t-value="i+1"/>
+
+                          </t>
+
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="9"><center><b>Insurance Details</b></center></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><b>Name</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Relation</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Percentage</b></center></td>
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.insurance_lines" t-as="l">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.relation"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.percentage"/></center></td>
+                        </tr>
+                          <t t-set="i" t-value="i+1"/>
+
+                          </t>
+
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="9"><center><b>Warning Details</b></center></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><b>Remark</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Date</b></center></td>
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.warning_lines" t-as="l">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.remark"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.date"/></center></td>
+                        </tr>
+                          <t t-set="i" t-value="i+1"/>
+
+                          </t>
+
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="9"><center><b>Previous Experience Details</b></center></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><b>From Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>To Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Position</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Organization</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Ref Name</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Ref Position</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Ref Phone</b></center></td>
+
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.previous_lines" t-as="l">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.from_date"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.to_date"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.position"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.organization"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.ref_name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.ref_position"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.ref_phone"/></center></td>
+                        </tr>
+                          <t t-set="i" t-value="i+1"/>
+
+                          </t>
+
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="9"><center><b>Loan Details</b></center></td>
+                        </tr>
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><b>Date</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Name</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Loan Amount</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Total Paid Amount</b></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><b>Balance Amount</b></center></td>
+                        </tr>
+                        <t t-set="i" t-value="1"/>
+                        <t t-foreach="o.loan_lines" t-as="l">
+                        <tr>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.date"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.name"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.loan_amount"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.total_paid_amount"/></center></td>
+                            <td colspan="1" style="border:1px solid black"><center><t t-esc="l.balance_amount"/></center></td>
+
+                        </tr>
+                          <t t-set="i" t-value="i+1"/>
+
+                          </t>
+
+                    </table>
+
+                </div>
+            </t>
+                </t>
+            </t>
+</template>
+
+
+</odoo>

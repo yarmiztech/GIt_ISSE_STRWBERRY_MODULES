@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report id="bonus_report"
+      		model="bonus.payment.history"
+      		string="Bonus Report"
+      		report_type="qweb-pdf"
+      		name="bonu_generation.bonus_report_view"
+      		file="bonu_generation.bonus_report_view"/>
+</odoo>
